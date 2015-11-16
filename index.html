@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Firebase Authentication By Email and Password</title>
+
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
+	<script type="text/javascript" src="app.js"></script>
+
+</head>
+<body>
+
+	<h1> Authentication by email and password!</h1>
+	<br>
+
+	<input id="userEmail" name="userEmail" type="email" placeholder="Enter email here">
+	<input id="userPassword" name="userPassword" type="password" placeholder="Enter password here">
+
+	<button id="createAccount">  Create Account </button>
+
+	<script>
+		var ref = new Firebase("https://amber-inferno-898.firebaseio.com/");
+
+		$("#createAccount").on('click', createUser);
+
+		function createUser(){
+			ref.createUser({
+  			email    : $("#userEmail").val(),
+  			password : $("#userPassword").val()
+			}, function(error, userData) {
+  			if (error) {
+    		console.log("Error creating user:", error);
+  			} 
+  			else {
+    		console.log("Successfully created user account with uid:", userData.uid);
+  			}
+			});	
+		}
+		
+
+	</script>
+</body>
+</html>
